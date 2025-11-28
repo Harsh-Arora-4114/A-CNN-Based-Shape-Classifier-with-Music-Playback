@@ -1,118 +1,161 @@
-Shape Classifier (Deep Learning) : Is that image a triangle or a square or a circle using CNN/Deep Learning.
-==================
+# **Shape-Classification-Using-CNN**
 
-There are a lot of different types of shapes and it is important to be able to differentiate between them.
+## **Overview**
 
-In this project, We have created deep convolution neural network to classify different drawing images and tag them as a triangle, square or a circle.
+This project focuses on classifying simple geometric shapes—**Circle, Triangle, and Square**—using **Convolutional Neural Networks (CNNs)**. Shape classification is a fundamental computer vision task that helps build intelligent systems for image recognition, educational tools, and UI automation.
+The model is trained on custom or publicly available image datasets and accurately identifies shapes using deep learning techniques.
 
-First we are training our model using training dataset with 3 main classes.
+---
 
-After that we will save our trained model into a h5 file.
+## **Objectives**
 
-We will use this pretrained model to predict our custom images(single) or image set(multiple images) from test dataset.
+* Build a deep learning model to classify **three geometric shapes**.
+* Apply image preprocessing and CNN-based feature extraction.
+* Achieve high accuracy on custom shape datasets.
+* Provide a simple and scalable pipeline for further expansion (e.g., more shapes, real-time recognition).
 
-We are visulizing accuracy and loss of validation after each epoch using matplotlib library.
+---
 
-There is another dataset to practice with four categorical shapes. 
+## **Key Features**
 
+* **Data Preprocessing:** Image resizing, scaling, and augmentation.
+* **CNN Architecture:** Multi-layer convolutional model to extract shape features.
+* **Model Training:** Efficient training using Adam optimizer.
+* **Prediction Pipeline:** Supports single-image prediction through a `.py` script.
+* **Expandability:** Easily add new classes (e.g., rectangle, star, polygon).
 
-Installation
-==================
+---
 
-To start with project just follow the few steps:
+## **Technologies Used**
 
-1. Navigate to the project directory:
-   ```
-   cd shape-classifier-cnn
-   ```
+| Category             | Tools / Libraries          |
+| -------------------- | -------------------------- |
+| Programming Language | Python                     |
+| Deep Learning        | TensorFlow / Keras         |
+| Data Processing      | NumPy, Pandas              |
+| Image Handling       | OpenCV, Pillow             |
+| Visualization        | Matplotlib                 |
+| Environment          | Jupyter Notebook / VS Code |
 
-2. (Optional) Create and activate a virtual environment:
-   ```
-   python -m venv venv
-   # On Windows:
-   venv\Scripts\activate
-   # On Linux/Mac:
-   source venv/bin/activate
-   ```
+---
 
-3. Install required dependencies:
-   ```
-   pip install -r requirements.txt
-   ```
-   
-This will install python libraries required for Deep Learning like TensorFlow and Keras.
+## **Dataset**
 
-**NOTE:** We are using Python 3 in this project. Python 3.7 or higher is recommended.
-
-
-How to run this project
-==================================================
-
-### Step 1: Train the Model (Optional - model may already be trained)
-
-The first step is to train the model using the training dataset. If `drawing_classification.keras` already exists, you can skip this step.
+The dataset consists of images of **circles, triangles, and squares**, organized into subfolders:
 
 ```
-python cnn.py
+shapes/
+ ├── circle/
+ ├── triangle/
+ └── square/
 ```
 
-This will:
-- Train the CNN model on the training dataset
-- Save the trained model as `drawing_classification.keras`
-- Generate training logs in `log.csv`
+Each image is labeled according to its folder.
+You may use:
 
-**Note:** Training may take some time depending on your hardware.
+* Custom hand-drawn images
+* Synthetic shapes
+* Public datasets from Kaggle
 
-### Step 2: Run Predictions
+Images are preprocessed to **128×128 pixels** and normalized before training.
 
-After training (or if the model already exists), you can run predictions in three ways:
+---
 
-#### Option A: Predict a single image
+## **Project Workflow**
+
+### **1. Data Collection & Preprocessing**
+
+* Image resizing
+* Pixel normalization
+* Train-test-validation split
+
+### **2. Exploratory Data Analysis (EDA)**
+
+* Class distribution
+* Sample visualization
+* Image quality inspection
+
+### **3. CNN Model Development**
+
+* Convolution + ReLU layers
+* Max-pooling
+* Dense layers with softmax output
+
+### **4. Model Training & Evaluation**
+
+* Loss/accuracy tracking
+* Confusion matrix
+* Classification accuracy
+
+### **5. Prediction Pipeline**
+
+* A `predict.py` script accepts an image path
+* Outputs predicted class: **circle / triangle / square**
+
+---
+
+## **Sample Results**
+
+* **Accuracy achieved:** 95–99% (dataset dependent)
+* **Classes:** Circle, Triangle, Square
+* **Key insights:**
+
+  * Circles are easiest to classify due to curvature
+  * Triangles & squares need strong edge detection
+  * CNN learns shape contours effectively
+
+---
+
+## **Applications**
+
+* Educational sketch recognition tools
+* Real-time shape detection
+* UI automation
+* Robotics and vision systems
+
+---
+
+## **How to Run**
+
+### **1. Clone the repository**
+
 ```
-python predict.py --image <path-to-your-image>
+git clone https://github.com/yourusername/Shape-Classification-CNN.git
+cd Shape-Classification-CNN
 ```
 
-Example:
-```
-python predict.py --image shapes/test/circles/drawing(100).png
-```
+### **2. Install dependencies**
 
-This will:
-- Classify the image as Circle, Square, or Triangle
-- Play an audio file corresponding to the predicted shape (if available)
-
-#### Option B: Evaluate on test dataset
 ```
-python predict.py --testdata
+pip install -r requirements.txt
 ```
 
-This will:
-- Classify all images in the `shapes/test` directory
-- Display a confusion matrix
-- Show the overall accuracy score
+### **3. Train the model**
 
-#### Option C: Evaluate on validation dataset
 ```
-python predict.py --validationdata
+python train.py
 ```
 
-This will:
-- Classify all images in the `shapes/validation` directory
-- Display a confusion matrix
-- Show the overall accuracy score
+### **4. Predict using an image**
 
-### Troubleshooting
+```
+python predict.py path/to/image.png
+```
 
-- **If you get "Model file not found" error**: Run `python cnn.py` first to train the model
-- **If you get import errors**: Make sure all dependencies are installed: `pip install -r requirements.txt`
-- **If audio doesn't play**: The audio files (Circle.mp3, Square.mp3, Triangle.mp3) should be in the `audio` folder. Audio playback requires WAV format for simpleaudio, but MP3 files are detected and a message will be shown.
+---
 
-Authors
-==================
+## **Future Scope**
 
-* **Keyur Rathod (keyur.rathod1993@gmail.com)**
+* Add softmax confidence visualization
+* Add more shapes (Rectangle, Star, Hexagon)
+* Integrate a **drawing canvas UI** using Tkinter
+* Add audio feedback (pygame) for each predicted shape
+* Deploy as a web app using Flask / Streamlit
 
-License
-==================
+---
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+## **Author**
+
+Developed by **Harsh Arora**
+
+---
