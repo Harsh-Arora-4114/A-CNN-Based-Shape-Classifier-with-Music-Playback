@@ -152,6 +152,10 @@ python predict.py path/to/image.png
 
 ---
 
+## License
+
+This project is licensed under the MIT License.
+
 ## **Author**
 
 Developed by **Harsh Arora**
